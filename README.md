@@ -5,7 +5,7 @@ To do list
     - [x] Post Cards
     - [x] Post Modal
 
-- [] Deploy on vercel
-- [] Add Database
+- [x] Deploy on vercel
+- [x] Add Database
 - [] Add upload image btn from uploadthing
-- [] Add authentication from Clerk
+- [x] Add authentication from Clerk

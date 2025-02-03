@@ -19,10 +19,12 @@ import {
 export const createTable = pgTableCreator((name) => `petphotos_${name}`);
 
 export const posts = createTable(
-  "post",
+  "posts",
   {
     id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
-    name: varchar("name", { length: 256 }),
+    userID: varchar("userID", {length: 1024}).notNull(),
+    content: varchar("content", { length: 2048 }).notNull(),
+    imgURL: varchar("imgURL", {length: 1024}),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -31,6 +33,6 @@ export const posts = createTable(
     ),
   },
   (example) => ({
-    nameIndex: index("name_idx").on(example.name),
+    nameIndex: index("name_idx").on(example.content),
   })
 );
