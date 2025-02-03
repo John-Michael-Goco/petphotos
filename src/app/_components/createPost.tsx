@@ -3,11 +3,12 @@
 import { SetStateAction, useState } from "react";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useUser } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import { UploadButton } from "~/utils/uploadthing";
 import { useRouter } from "next/navigation"
 
 export default function InputModal() {
+  const [showUploadButton, setShowUploadButton] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
 
@@ -16,6 +17,11 @@ export default function InputModal() {
   
   const handleTextChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setText(e.target.value);
+  };
+
+  const handleUploadComplete = () => {
+    setShowUploadButton(false); // Hide the upload button after image upload
+    router.refresh(); // Refresh the page or component
   };
   
   return (
@@ -67,12 +73,13 @@ export default function InputModal() {
                   onChange={handleTextChange}
                   required
                 ></textarea>
-                <div className="imageContainer flex items-center justify-between mb-4">
-                  <p className="ml-2 imgQ">Add Image to your post?</p>
-                  <UploadButton endpoint="imageUploader" 
-                  onClientUploadComplete={() => {router.refresh()}}
-                  />
-                </div>
+                {showUploadButton && (
+          <UploadButton
+            endpoint="imageUploader"
+            onClientUploadComplete={handleUploadComplete} // Trigger when upload is complete
+          />
+        )}
+
                 <button
                   className={`postButton px-4 py-2 rounded-lg text-white ${
                   text
