@@ -3,26 +3,33 @@
 import { SetStateAction, useState } from "react";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-const profImg =
-  "https://lkp5mmomjt.ufs.sh/f/HfOOWlx6fXnmKGBcKI3MHxEWZNr9D5FqobRfXiz6CTO1mG0s";
+import { useUser } from "@clerk/nextjs";
+import { UploadButton } from "~/utils/uploadthing";
+import { useRouter } from "next/navigation"
 
 export default function InputModal() {
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
 
+  const { user } = useUser();
+  const router = useRouter();
+  
   const handleTextChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setText(e.target.value);
   };
-
+  
   return (
     <>
       <div className="createPost mx-4 my-6 flex max-w-md rounded-lg shadow-lg md:mx-auto md:max-w-xl">
-        <img
-          src={profImg}
-          alt="Profile"
-          className="ml-3 mt-3 h-8 w-8 rounded-full"
-        />
+        {user?.imageUrl ? (
+          <img
+            src={user.imageUrl}
+            alt="User profile"
+            className="ml-3 mt-3 h-8 w-8 rounded-full"
+          />
+        ) : (
+          <p>No profile image available</p>
+        )}
         <button
           className="flex w-full cursor-pointer items-center gap-2 rounded-lg p-3 text-left shadow-sm hover:border-blue-500 focus:outline-none"
           onClick={() => setShowModal(true)}
@@ -52,17 +59,19 @@ export default function InputModal() {
               </h2>
               <hr className="mx-auto my-2 mb-6 max-w-md border-t-2 border-[#3c3c3f] md:max-w-xl" />
               <div className="flex flex-col gap-2">
-              <textarea
-                placeholder="What's new, User?"
-                className="contentInput flex-grow rounded-xl px-4 py-2 focus:outline-none mb-20 overflow-hidden resize-none"
-                style={{ color: "#afaeae" }}
-                value={text}
-                onChange={handleTextChange}
-                required
-              ></textarea>
+                <textarea
+                  placeholder="What's new, User?"
+                  className="contentInput flex-grow rounded-xl px-4 py-2 focus:outline-none mb-20 overflow-hidden resize-none"
+                  style={{ color: "#afaeae" }}
+                  value={text}
+                  onChange={handleTextChange}
+                  required
+                ></textarea>
                 <div className="imageContainer flex items-center justify-between mb-4">
                   <p className="ml-2 imgQ">Add Image to your post?</p>
-                  <button className="mx-2 ">IMAGE</button>
+                  <UploadButton endpoint="imageUploader" 
+                  onClientUploadComplete={() => {router.refresh()}}
+                  />
                 </div>
                 <button
                   className={`postButton px-4 py-2 rounded-lg text-white ${
