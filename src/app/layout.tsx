@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import TopNav from "./_components/topNav";
 import PostCards from "./_components/postCards";
+import InputModal from "./_components/createPost";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -18,13 +19,10 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <TopNav />
+        <InputModal />
         <PostCards />
-        {/* <div className="flex flex-col md:flex-row">
-          <section className="w-full md:w-1/4 rounded p-4">
-          </section> */}
-          {/* <section className="w-full md:w-3/4 rounded p-4">
-          </section>
-        </div> */}
+        <PostCards />
+        <PostCards />
         {children}
       </body>
     </html>

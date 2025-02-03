@@ -3,11 +3,85 @@
 @tailwind utilities;
 
 body {
-    background-color: #222229;
+    background-color: #1d1d22;
     color: #fff;
     font-family: "Roboto", serif;
 }
 nav{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #16161b;
+}
+
+.createPost{
+    background-color: #29292e;
+}
+
+.postCards{
+    background-color: #29292e;
+}
+.icon{
+    color: rgb(45, 121, 45);
+}
+
+.icon:hover{
+    background-color: #3c3c3f;
+}
+
+.createPostInput{
+    background: #3c3c3f;
+    border: 1px solid rgb(51, 47, 47);
+}
+
+.postBox{
+    background-color: #222225;
+    width: 450px;
+}
+
+.closeButton{
+    border: 1px solid rgb(51, 47, 47);
+    border-radius: 40px;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #313135;
+}
+
+.closeButton:active{
+    color: rgb(179, 68, 68);
+}
+
+.contentInput{
+    background-color: #222225;
+}
+
+.imageContainer{
+    border: 2px solid rgb(56, 53, 53);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.imgQ{
+    color: #969292;
+}
+
+.postButton{
+    background-color: blue;
+}
+
+.userName{
+    color: #eee7e7;
+}
+
+.timeline{
+    color: #b9b5b5;
+}
+
+.postContent{
+    color: #cecbcb;
+}
+
+.imageContent{
+    border: 2px solid rgb(54, 53, 53);
 }
