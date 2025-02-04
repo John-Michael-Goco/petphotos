@@ -1,4 +1,17 @@
-To do list
+## To do list
+- [] Update Query for uploading image
+- [] Add image after uploading in the modal
+- [] Fix Query in Posting
+- [] Update feed
+
+Optional
+
+- [] Add Edit Function
+- [] Add Delete Function
+- [] Add lazy loading and Infinite scroll
+
+-------------------
+Done List
 
 - [x] UI
     - [x] Create NavBar
@@ -7,5 +20,6 @@ To do list
 
 - [x] Deploy on vercel
 - [x] Add Database
-- [] Add upload image btn from uploadthing
+- [x] Add upload image btn from uploadthing
 - [x] Add authentication from Clerk
+
