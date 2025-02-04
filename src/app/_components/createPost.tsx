@@ -11,7 +11,7 @@ export default function InputModal() {
   const [showUploadButton, setShowUploadButton] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
-
+  
   const { user } = useUser();
   const router = useRouter();
   
@@ -19,12 +19,9 @@ export default function InputModal() {
     setText(e.target.value);
   };
 
-  const handleUploadComplete = (files: string | any[]) => {
-    if (files && files.length > 0) {
-      setUploadedImageUrl(files[0].imgURL);
-    }
+  const handleUploadComplete = () => {
     setShowUploadButton(false);
-    router.refresh();
+    router.refresh(); 
   };
 
   return (
@@ -98,7 +95,3 @@ export default function InputModal() {
     </>
   );
 }
-function setUploadedImageUrl(fileUrl: any) {
-  throw new Error("Function not implemented.");
-}
-
