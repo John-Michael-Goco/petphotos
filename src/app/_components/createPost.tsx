@@ -21,7 +21,7 @@ export default function InputModal() {
 
   const handleUploadComplete = (files: string | any[]) => {
     if (files && files.length > 0) {
-      setUploadedImageUrl(files[0].imgUrl);
+      setUploadedImageUrl(files[0].imgURL);
     }
     setShowUploadButton(false);
     router.refresh();
