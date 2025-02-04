@@ -3,7 +3,7 @@
 import { SetStateAction, useState } from "react";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { UploadButton } from "~/utils/uploadthing";
 import { useRouter } from "next/navigation"
 
@@ -19,11 +19,14 @@ export default function InputModal() {
     setText(e.target.value);
   };
 
-  const handleUploadComplete = () => {
-    setShowUploadButton(false); // Hide the upload button after image upload
-    router.refresh(); // Refresh the page or component
+  const handleUploadComplete = (files: string | any[]) => {
+    if (files && files.length > 0) {
+      setUploadedImageUrl(files[0].imgUrl);
+    }
+    setShowUploadButton(false);
+    router.refresh();
   };
-  
+
   return (
     <>
       <div className="createPost mx-4 my-6 flex max-w-md rounded-lg shadow-lg md:mx-auto md:max-w-xl">
@@ -74,12 +77,8 @@ export default function InputModal() {
                   required
                 ></textarea>
                 {showUploadButton && (
-          <UploadButton
-            endpoint="imageUploader"
-            onClientUploadComplete={handleUploadComplete} // Trigger when upload is complete
-          />
-        )}
-
+                  <UploadButton endpoint="imageUploader" onClientUploadComplete={handleUploadComplete} />
+                )}
                 <button
                   className={`postButton px-4 py-2 rounded-lg text-white ${
                   text
@@ -99,3 +98,7 @@ export default function InputModal() {
     </>
   );
 }
+function setUploadedImageUrl(fileUrl: any) {
+  throw new Error("Function not implemented.");
+}
+
