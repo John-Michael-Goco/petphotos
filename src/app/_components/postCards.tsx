@@ -1,9 +1,14 @@
+import { eq } from "drizzle-orm";
 import { db } from "~/server/db";
 
 export const dynamic = "force-dynamic"
+
 export default async function PostCards() {
     // Fetch the posts from the database
-    const posts = await db.query.posts.findMany();
+    const posts = await db.query.posts.findMany({
+        where: (model) => eq(model.status, "Published"),
+        orderBy: (model, { desc }) => desc(model.id),
+    });
     
     return (
         <div>

@@ -1,6 +1,6 @@
 ## To do list
 - [] Update Query for uploading image
-- [] Add image after uploading in the modal
+- [x] Add image after uploading in the modal
 - [] Fix Query in Posting
 - [] Update feed
 

@@ -36,6 +36,8 @@ export const ourFileRouter = {
 
       await db.insert(posts).values({
         userID: file.name,
+        imgURL: file.url,
+        status: "Pending",
       })
 
       console.log("file url", file.url);
