@@ -35,7 +35,7 @@ export const ourFileRouter = {
       console.log("Upload complete for userId:", metadata.userId);
 
       await db.insert(posts).values({
-        userID: file.name,
+        userID: metadata.userId,
         imgURL: file.url,
         status: "Pending",
       })

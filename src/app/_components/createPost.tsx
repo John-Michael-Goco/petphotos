@@ -1,18 +1,22 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { SetStateAction, useState } from "react";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "@clerk/nextjs";
 import { UploadButton } from "~/utils/uploadthing";
 import { useRouter } from "next/navigation";
+import { posted } from "~/server/actions";
 
 export default function InputModal() {
   const [showUploadButton, setShowUploadButton] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null); // State to store the uploaded image URL
-
+  const [imageId, setImageId] = useState<number | null>(null);
+  
   const { user } = useUser();
   const router = useRouter();
 
@@ -25,20 +29,20 @@ export default function InputModal() {
       const uploadedImageUrl = res[0]?.url || null;
       setImageUrl(uploadedImageUrl);
     }
-  
+
     setShowUploadButton(false);
     router.refresh();
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setShowUploadButton(true); 
-    setImageUrl(null); 
+    setShowUploadButton(true);
+    setImageUrl(null);
   };
 
   return (
     <>
-      <div className="createPost mx-4 my-6 flex max-w-md rounded-lg shadow-lg md:mx-auto md:max-w-xl">
+      <div className="createPost mx-4 my-6 flex max-w-md rounded-lg shadow-lg md:mx-auto md:max-w-xl" id="top">
         {user?.imageUrl ? (
           <img
             src={user.imageUrl}
@@ -79,7 +83,7 @@ export default function InputModal() {
               <div className="flex flex-col gap-2">
                 <textarea
                   placeholder="What's new, User?"
-                  className="contentInput flex-grow rounded-xl px-4 py-2 focus:outline-none mb-4 overflow-hidden resize-none"
+                  className="contentInput flex-grow rounded-xl px-4 py-2 focus:outline-none mb-4 overflow-hidden resize-none w-full h-40"
                   style={{ color: "#afaeae" }}
                   value={text}
                   onChange={handleTextChange}
@@ -87,12 +91,21 @@ export default function InputModal() {
                 ></textarea>
                 {/* Display the uploaded image */}
                 {imageUrl && (
-                  <div className="mt-4">
+                  <div className="mt-4 relative">
                     <img
                       src={imageUrl}
                       alt="Uploaded"
                       className="max-w-full h-auto rounded-lg"
                     />
+                    <button
+                      className="absolute top-2 right-2 bg-red-500 text-white text-sm px-2 py-1 rounded-lg hover:bg-red-600"
+                      onClick={() => {
+                        setImageUrl(null);
+                        setShowUploadButton(true);
+                      }}
+                    >
+                      X
+                    </button>
                   </div>
                 )}
                 {showUploadButton && (
@@ -100,18 +113,26 @@ export default function InputModal() {
                     endpoint="imageUploader"
                     onClientUploadComplete={handleUploadComplete}
                   />
-                  
                 )}
-                <button
-                  className={`postButton px-4 py-2 rounded-lg text-white ${
-                    text
-                      ? "bg-blue-500 hover:bg-blue-600"
-                      : "bg-gray-300 cursor-not-allowed"
-                  }`}
-                  disabled={!text}
+                <form
+                  action={async () => {
+                    // Pass the textarea value (text) and the image ID (e.g., 1) to the server action
+                    await posted(16, text);
+                  }}
                 >
-                  POST
-                </button>
+                  <div className="flex justify-center">
+                    <button
+                      className={`postButton px-4 py-2 rounded-lg text-white ${text
+                          ? "bg-blue-500 hover:bg-blue-600"
+                          : "bg-gray-300 cursor-not-allowed"
+                        }`}
+                      disabled={!text}
+                      type="submit"
+                    >
+                      POST
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

@@ -22,7 +22,7 @@ export const posts = createTable(
   "posts",
   {
     id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
-    userID: varchar("userID", {length: 1024}).notNull(),
+    userID: varchar("userID", {length: 1024}),
     content: varchar("content", { length: 2048 }),
     imgURL: varchar("imgURL", {length: 1024}).notNull(),
     status: varchar("status", {length: 64}).notNull(),
