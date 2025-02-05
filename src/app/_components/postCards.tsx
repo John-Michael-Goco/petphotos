@@ -1,11 +1,14 @@
 import { eq } from "drizzle-orm";
 import { db } from "~/server/db";
-import { getPost } from "~/server/queries";
 
 export const dynamic = "force-dynamic"
 
 export default async function PostCards() {
-    const posts = await getPost();
+    // Fetch the posts from the database
+    const posts = await db.query.posts.findMany({
+        where: (model) => eq(model.status, "Published"),
+        orderBy: (model, { desc }) => desc(model.id),
+    });
     
     return (
         <div>
@@ -22,7 +25,7 @@ export default async function PostCards() {
                         />
                         <div>
                             <div className="flex items-center justify-between">
-                                <h2 className="userName -mt-1 text-lg font-semibold">{post.userID}</h2>
+                                <h2 className="userName -mt-1 text-lg font-semibold">{post.userName}</h2>
                                 <small className="timeline text-xs">
                                     {post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "No date available"}
                                 </small>

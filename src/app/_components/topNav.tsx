@@ -12,9 +12,9 @@ export default function TopNav() {
             <div>Pet Photos</div>
             <div className="flex items-center justify-between">
                 <div className="px-1">Home</div>
-                <SignedIn>
+                {/* <SignedIn>
                     <div className="px-5">Posts</div>
-                </SignedIn>
+                </SignedIn> */}
             </div>
             <div>
                 <SignedOut>

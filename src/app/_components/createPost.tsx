@@ -8,18 +8,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "@clerk/nextjs";
 import { UploadButton } from "~/utils/uploadthing";
 import { useRouter } from "next/navigation";
-import { posted } from "~/server/actions";
-
+import { getLastID, posted } from "~/server/actions";
 export default function InputModal() {
   const [showUploadButton, setShowUploadButton] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
-  const [imageUrl, setImageUrl] = useState<string | null>(null); // State to store the uploaded image URL
-  const [imageId, setImageId] = useState<number | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null); 
   
   const { user } = useUser();
   const router = useRouter();
-
+  
   const handleTextChange = (e: { target: { value: SetStateAction<string> } }) => {
     setText(e.target.value);
   };
@@ -116,8 +114,9 @@ export default function InputModal() {
                 )}
                 <form
                   action={async () => {
+                    const id = await getLastID();
                     // Pass the textarea value (text) and the image ID (e.g., 1) to the server action
-                    await posted(16, text);
+                    await posted(id || 0, text);
                   }}
                 >
                   <div className="flex justify-center">
