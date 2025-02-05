@@ -1,18 +1,9 @@
 ## To do list
-- [] Update Query for uploading image
+- [x] Update Query for uploading image
 - [x] Add image after uploading in the modal
 - [x] Add remove image in the post modal
-- [] Fix Query in Posting
-- [] Update feed
-
-Optional
-
-- [] Add Edit Function
-- [] Add Delete Function
-
--------------------
-Done List
-
+- [x] Fix Query in Posting
+- [x] Update feed
 - [x] UI
     - [x] Create NavBar
     - [x] Post Cards

@@ -1,7 +1,7 @@
-import { eq } from "drizzle-orm"; 
+import { eq } from "drizzle-orm";
 import { db } from "~/server/db";
 
-export const dynamic = "force-dynamic"; 
+export const dynamic = "force-dynamic";
 
 export default async function PostCards() {
     // Fetch the posts from the database
@@ -22,11 +22,11 @@ export default async function PostCards() {
                 >
                     <div className="flex items-start px-4 py-6">
                         {/* Display the user's avatar (currently using a placeholder image) */}
-                        {/* <img
+                        <img
                             className="mr-4 h-12 w-12 rounded-full object-cover shadow"
-                            src={"https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"}
+                            src={post.userImg || "/path/to/fallback-image.jpg"}  // Use a fallback image
                             alt="avatar"
-                        /> */}
+                        />
                         <div>
                             {/* Post header with username and creation date */}
                             <div className="flex items-center justify-between">

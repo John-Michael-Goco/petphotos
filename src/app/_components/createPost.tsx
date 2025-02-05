@@ -64,7 +64,7 @@ export default function InputModal() {
             className="ml-3 mt-3 h-8 w-8 rounded-full"
           />
         ) : (
-          <p>No profile image available</p>
+          <p> </p>
         )}
 
         {/* Button to open the modal for creating a post */}

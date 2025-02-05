@@ -6,7 +6,6 @@ import { posts } from "~/server/db/schema";
 
 const f = createUploadthing();
 
-
 export const ourFileRouter = {
   imageUploader: f({
     image: {
@@ -28,16 +27,13 @@ export const ourFileRouter = {
           headers: {
             Authorization: `Bearer ${process.env.CLERK_SECRET_KEY}`,
           },
-        },
+        }
       ).then((res) => res.json());
-      
-      // Extract the user's name from the metadata
-      const userName = clerkUser.firstName
-        ? `${clerkUser.firstName} ${clerkUser.lastName || ""}`.trim()
-        : "John Michael Goco";
 
-      // Return metadata including the user's ID and name
-      return { userId: user.userId, userName };
+      const userName = `${clerkUser.first_name} ${clerkUser.last_name}`;
+      const metaImgUrl = clerkUser.profile_image_url; // Assuming the URL is stored under profile_image_url
+
+      return { userId: user.userId, userName, metaImgUrl };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // Log the upload completion
@@ -46,9 +42,10 @@ export const ourFileRouter = {
       // Insert the post into the database
       await db.insert(posts).values({
         userID: metadata.userId,
-        userName: metadata.userName, // Use the user's name from metadata
+        userName: metadata.userName, // Dynamically use the fetched userName
         imgURL: file.url,
         status: "Pending",
+        userImg: metadata.metaImgUrl, // Include the meta image URL in the insert
       });
 
       // Log the file URL
