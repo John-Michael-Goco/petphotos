@@ -1,13 +1,22 @@
+import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
+import { UploadThingError } from "uploadthing/server";
 import { db } from "~/server/db";
 
 export const dynamic = "force-dynamic";
 
-export default async function PostCards() {
-    // Fetch the posts from the database
+async function Post() {
+    // Fetch the user details to check their userId
+    const user = await auth();
+
+    // If the user is not authenticated, throw an error
+    if (!user.userId) throw new UploadThingError("Unauthorized");
+
+    // Fetch posts from the database for the authenticated user
     const posts = await db.query.posts.findMany({
-        // Filter posts where the status is "Published"
-        where: (model) => eq(model.status, "Published"),
+        // Filter posts where the status is "Published" AND the userId matches the authenticated user
+        where: (model) => eq(model.status, "Published") && eq(model.userID, user.userId),
         // Order posts by their ID in descending order (newest first)
         orderBy: (model, { desc }) => desc(model.id),
     });
@@ -54,4 +63,17 @@ export default async function PostCards() {
             ))}
         </div>
     );
+}
+
+export default async function PostCards() {
+    return (
+        <>
+            <SignedOut>
+                <div className="h-full w-full text-2x1 text-center py-10 text-2xl">Please Sign In Above</div>
+            </SignedOut>
+            <SignedIn>
+                <Post />
+            </SignedIn>
+        </>
+    )
 }
