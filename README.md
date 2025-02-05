@@ -1,14 +1,13 @@
 ## To do list
 - [] Update Query for uploading image
 - [x] Add image after uploading in the modal
-- [x] Fix Query in Posting
+- [] Fix Query in Posting
 - [] Update feed
 
 Optional
 
 - [] Add Edit Function
 - [] Add Delete Function
-- [] Add lazy loading and Infinite scroll
 
 -------------------
 Done List
