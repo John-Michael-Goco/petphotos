@@ -16,7 +16,7 @@ async function Post() {
     // Fetch posts from the database for the authenticated user
     const posts = await db.query.posts.findMany({
         // Filter posts where the status is "Published" AND the userId matches the authenticated user
-        where: (model) => eq(model.status, "Published") && eq(model.userID, user.userId),
+        where: (model) => eq(model.status, "Published"),
         // Order posts by their ID in descending order (newest first)
         orderBy: (model, { desc }) => desc(model.id),
     });
