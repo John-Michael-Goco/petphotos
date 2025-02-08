@@ -1,13 +1,13 @@
 ## To do list
-
-- [] Add Next Page
-    - [] Add Dropdown on the postCards
-        - [] Add Edit and Delete Function
-- [] Add Search Function
-- [] Add Like and Comment Button on the postCards
-- [] Add Follow Functions
+- [ ] Add Design
+- [ ] Add Next Page
+    - [ ] Add Dropdown on the postCards
+        - [ ] Add Edit and Delete Function
+- [ ] Add Search Function
+- [ ] Add Like and Comment Button on the postCards
+- [ ] Add Follow Functions
 - [x] Add Comment and Follow tables
-- [] Fix the bug on redirecting at the bottom of the page
+- [ ] Fix the bug on redirecting at the bottom of the page
 
 ## Done list 
 - [x] Update Query for uploading image
