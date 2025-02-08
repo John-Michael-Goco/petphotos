@@ -1,4 +1,4 @@
-### To do list
+## To do list
 - [ ] Add Design
 - [ ] Add Next Page
     - [ ] Add Dropdown on the postCards
@@ -9,7 +9,7 @@
 - [x] Add Comment and Follow tables
 - [ ] Fix the bug on redirecting at the bottom of the page
 
-### Done list 
+## Done list 
 - [x] Update Query for uploading image
 - [x] Add image after uploading in the modal
 - [x] Add remove image in the post modal
