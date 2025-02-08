@@ -1,4 +1,4 @@
-### Web Posting 
+#### Web Posting 
 
 ## Overview
 This project is a modern web application built using cutting-edge technologies such as Next.js and TypeScript, featuring seamless image uploads and secure user authentication.
