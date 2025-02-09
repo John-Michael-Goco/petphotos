@@ -128,8 +128,8 @@ export default function InputModal() {
                   <div className="flex justify-center">
                     <button
                       className={`postButton px-4 py-2 rounded-lg text-white ${text && imageUrl
-                          ? "bg-blue-500 hover:bg-blue-600"
-                          : "bg-gray-300 cursor-not-allowed"
+                        ? "bg-blue-500 hover:bg-blue-600"
+                        : "bg-gray-300 cursor-not-allowed"
                         }`}
                       disabled={!text || !imageUrl}
                       type="submit"

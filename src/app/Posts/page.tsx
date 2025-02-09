@@ -3,7 +3,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 
 // Components
 import TopNav from "../_components/topNav";
-import PostCards from "../_components/postCards";
+import MyPostCards from "../_components/myPostCards";
 import InputModal from "../_components/createPost";
 // Clerk Components
 import { SignedIn } from "@clerk/nextjs";
@@ -22,7 +22,7 @@ export default function Posts() {
           <SignedIn>
             <InputModal />
           </SignedIn>
-          <PostCards />
+          <MyPostCards />
     </main>
   );
 }

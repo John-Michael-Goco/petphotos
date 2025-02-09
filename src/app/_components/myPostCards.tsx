@@ -1,12 +1,12 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { UploadThingError } from "uploadthing/server";
 import { db } from "~/server/db";
-
 export const dynamic = "force-dynamic";
 
-async function Post() {
+
+async function MyPost() {
     // Fetch the user details to check their userId
     const user = await auth();
 
@@ -15,7 +15,12 @@ async function Post() {
 
     // Fetch posts from the database for the authenticated user
     const posts = await db.query.posts.findMany({
-        where: (model) => eq(model.status, "Published"),
+        // Filter posts where the status is "Published" AND the userId matches the authenticated user
+        where: (model) =>
+            and(
+                eq(model.status, "Published"), // Check if status is "Published"
+                eq(model.userID, user.userId) // Check if userID matches
+            ),
         orderBy: (model, { desc }) => desc(model.id),
     });
 
@@ -32,22 +37,23 @@ async function Post() {
                             {/* Display the user's avatar (currently using a placeholder image) */}
                             <img
                                 className="mr-4 h-12 w-12 rounded-full object-cover shadow"
-                                src={post.userImg || "/path/to/fallback-image.jpg"}  // Use a fallback image
+                                src={post.userImg || ""}
                                 alt="avatar"
                             />
                             <div className="w-full">
                                 {/* Post header with username and timeline text */}
                                 <div className="flex items-center justify-between w-full">
                                     <h2 className="userName -mt-1 text-lg font-semibold">{post.userName}</h2>
-                                    <small className="timeline text-xs text-gray-500">
-                                        {/* Display the post creation date in a readable format */}
+                                    <button>X</button>
+                                </div>
+                                <div className="flex items-center justify-between w-full">
+                                    <p className="postContent mt-3 text-sm">
+                                        {post.content}
+                                    </p>
+                                    <small className="timeline text-xs">
                                         {post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "No date available"}
                                     </small>
                                 </div>
-                                {/* Post content */}
-                                <p className="postContent mt-3 text-sm">
-                                    {post.content}
-                                </p>
                             </div>
                         </div>
                         <div>
@@ -70,11 +76,8 @@ async function Post() {
 export default async function PostCards() {
     return (
         <>
-            <SignedOut>
-                <div className="h-full w-full text-2x1 text-center py-10 text-2xl">Please Sign In Above</div>
-            </SignedOut>
             <SignedIn>
-                <Post />
+                <MyPost />
             </SignedIn>
         </>
     )
