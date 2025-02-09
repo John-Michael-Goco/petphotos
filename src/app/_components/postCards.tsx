@@ -27,7 +27,7 @@ async function Post() {
             {posts.map((post) => (
                 <div
                     key={post.id} // Unique key for each post to help React with rendering
-                    className="postCards mx-4 my-10 flex max-w-md rounded-lg bg-white shadow-lg md:mx-auto md:max-w-2xl"
+                    className="postCards mx-4 my-10 flex max-w-md rounded-lg bg-white shadow-lg md:mx-auto md:max-w-xl"
                 >
                     <div className="flex items-start px-4 py-6">
                         {/* Display the user's avatar (currently using a placeholder image) */}

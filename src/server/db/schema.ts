@@ -41,35 +41,35 @@ export const posts = createTable(
   })
 );
 
-// Comments table
-export const comments = createTable(
-  "comments",
-  {
-    id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
-    postID: integer("postID").notNull().references(() => posts.id),
-    userID: varchar("userID", { length: 1024 }),
-    commentText: varchar("comment_text", { length: 1024 }).notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-  },
-  (example) => ({
-    postIndex: index("post_idx").on(example.postID),
-  })
-);
+// // Comments table
+// export const comments = createTable(
+//   "comments",
+//   {
+//     id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+//     postID: integer("postID").notNull().references(() => posts.id),
+//     userID: varchar("userID", { length: 1024 }),
+//     commentText: varchar("comment_text", { length: 1024 }).notNull(),
+//     createdAt: timestamp("created_at", { withTimezone: true })
+//       .default(sql`CURRENT_TIMESTAMP`)
+//       .notNull(),
+//   },
+//   (example) => ({
+//     postIndex: index("post_idx").on(example.postID),
+//   })
+// );
 
-// follow table
-export const follow = createTable(
-  "follow",
-  {
-    id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
-    followerID: varchar("follower_id", { length: 1024 }).notNull(), // ID of the user who follows
-    followingID: varchar("following_id", { length: 1024 }).notNull(), // ID of the user being followed
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-  },
-  (example) => ({
-    followIndex: index("follow_idx").on(example.followerID, example.followingID),
-  })
-);
+// // follow table
+// export const follow = createTable(
+//   "follow",
+//   {
+//     id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+//     followerID: varchar("follower_id", { length: 1024 }).notNull(), // ID of the user who follows
+//     followingID: varchar("following_id", { length: 1024 }).notNull(), // ID of the user being followed
+//     createdAt: timestamp("created_at", { withTimezone: true })
+//       .default(sql`CURRENT_TIMESTAMP`)
+//       .notNull(),
+//   },
+//   (example) => ({
+//     followIndex: index("follow_idx").on(example.followerID, example.followingID),
+//   })
+// );

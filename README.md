@@ -22,11 +22,13 @@ This project is a modern web application built using cutting-edge technologies s
 - [ ] Add Next Page
     - [ ] Add Dropdown on the postCards
         - [ ] Add Edit and Delete Function
-- [ ] Add Search Function
+- [ ] Fix the bug on redirecting at the bottom of the page
+
+<!-- - [ ] Add Search Function
 - [ ] Add Like and Comment Button on the postCards
 - [ ] Add Follow Functions
-- [x] Add Comment and Follow tables
-- [ ] Fix the bug on redirecting at the bottom of the page
+- [ ] Add Comment, ReplyComment, Follow, and Notification tables -->
+
 
 ## Done list 
 - [x] Update Query for uploading image

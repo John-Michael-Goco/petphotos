@@ -17,11 +17,9 @@ export default function TopNav() {
             <div className="flex items-center justify-between">
                 {/* Home link */}
                 <a className="px-1" href='/'>Home</a>
-
-                {/* Example of a conditional link for signed-in users (currently commented out) */}
-                {/* <SignedIn>
-                    <a className="px-5" href='/'>Posts</a>
-                </SignedIn> */}
+                <SignedIn>
+                    <a className="px-5" href='/Posts'>Posts</a>
+                </SignedIn>
             </div>
             <div>
                 <SignedOut>

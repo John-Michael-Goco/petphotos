@@ -41,7 +41,7 @@ export default function InputModal() {
 
   return (
     <>
-      <div className="createPost mx-4 my-6 flex max-w-md rounded-lg shadow-lg md:mx-auto md:max-w-2xl">
+      <div className="createPost mx-4 my-6 flex max-w-md rounded-lg shadow-lg md:mx-auto md:max-w-xl">
         {user?.imageUrl ? (
           <img
             src={user.imageUrl}
