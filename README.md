@@ -18,17 +18,9 @@ This project is a modern web application built using cutting-edge technologies s
 - Seamless Deployment: Continuous deployment via Vercel.
 
 ## To do list
-- [ ] Add Design
 - [ ] Add Next Page
-    - [ ] Add Dropdown on the postCards
-        - [ ] Add Edit and Delete Function
+    - [ ] Add Delete Function
 - [ ] Fix the bug on redirecting at the bottom of the page
-
-<!-- - [ ] Add Search Function
-- [ ] Add Like and Comment Button on the postCards
-- [ ] Add Follow Functions
-- [ ] Add Comment, ReplyComment, Follow, and Notification tables -->
-
 
 ## Done list 
 - [x] Update Query for uploading image
