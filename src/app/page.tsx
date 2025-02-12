@@ -18,7 +18,7 @@ export default function HomePage() {
           <NextSSRPlugin
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
-          <TopNav />
+          
           <SignedIn>
             <InputModal />
           </SignedIn>

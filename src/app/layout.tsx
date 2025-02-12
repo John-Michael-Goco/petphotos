@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 
 // Clerk Components
 import { ClerkProvider } from "@clerk/nextjs";
+import TopNav from "./_components/topNav";
 
 export const metadata: Metadata = {
   title: "Pet Photos Sharing",
@@ -18,8 +19,10 @@ export default function RootLayout({
   
   return (
     <ClerkProvider>
-      <html lang="en" className={`${GeistSans.variable}`}>
-        <body>
+      <html lang="en" className={`${GeistSans.variable}`} suppressHydrationWarning>
+        <body className="bg-neutral-700 text-neutral-300">
+
+        <TopNav />
           {children}
         </body>
       </html>

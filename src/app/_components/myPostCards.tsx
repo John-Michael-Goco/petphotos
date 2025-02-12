@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 async function MyPost() {
     // Fetch the user details to check their userId
     const user = await auth();
-
+    console.log('This is user', user)
     // If the user is not authenticated, throw an error
     if (!user.userId) throw new UploadThingError("Unauthorized");
 
@@ -23,7 +23,9 @@ async function MyPost() {
             ),
         orderBy: (model, { desc }) => desc(model.id),
     });
-
+    console.log('This is post', posts);
+    
+    
     return (
         <div>
             {/* Map through the fetched posts and render each one */}
