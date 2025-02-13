@@ -70,6 +70,9 @@ async function Post() {
 export default async function PostCards() {
     return (
         <>
+            <SignedOut>
+                <div className="h-full w-full text-2x1 text-center py-10 text-2xl">Please Sign In Above</div>
+            </SignedOut>
             <SignedIn>
                 <Post />
             </SignedIn>
