@@ -1,37 +1,40 @@
-"use client";
+"use client"; // Enables React Server Components for Next.js
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"; // Forces dynamic rendering
 
 import { SetStateAction, useState } from "react";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useUser } from "@clerk/nextjs";
-import { UploadButton } from "~/utils/uploadthing";
+import { useUser } from "@clerk/nextjs"; // Clerk authentication for user session management
+import { UploadButton } from "~/utils/uploadthing"; // Importing the UploadButton component
 import { useRouter } from "next/navigation";
-import { getLastID, posted } from "~/server/actions";
+import { getLastID, posted } from "~/server/actions"; // Server actions for fetching and posting data
 
 export default function InputModal() {
+  // State hooks to manage UI behavior
   const [showUploadButton, setShowUploadButton] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const { user } = useUser();
+  const { user } = useUser(); 
   const router = useRouter();
 
+  // Handles text input change
   const handleTextChange = (e: { target: { value: SetStateAction<string> } }) => {
     setText(e.target.value);
   };
 
+  // Handles upload completion and updates state with uploaded image URL
   const handleUploadComplete = async (res: { url: string }[]) => {
     if (res && res.length > 0) {
       const uploadedImageUrl = res[0]?.url || null;
       setImageUrl(uploadedImageUrl);
     }
-
-    setShowUploadButton(false);
-    router.refresh();
+    setShowUploadButton(false); // Hides upload button after successful upload
+    router.refresh(); // Refreshes the page to update state
   };
 
+  // Closes the modal and resets state values
   const handleCloseModal = () => {
     setShowModal(false);
     setShowUploadButton(true);
@@ -41,6 +44,7 @@ export default function InputModal() {
 
   return (
     <>
+      {/* Post creation button */}
       <div className="createPost mx-4 my-6 flex max-w-md rounded-lg shadow-lg md:mx-auto md:max-w-xl">
         {user?.imageUrl ? (
           <img
@@ -67,6 +71,7 @@ export default function InputModal() {
           </a>
         </button>
 
+        {/* Modal for post creation */}
         {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="postBox relative rounded-xl p-6 shadow-lg">
@@ -84,15 +89,17 @@ export default function InputModal() {
               <hr className="mx-auto my-2 mb-6 max-w-md border-t-2 border-[#3c3c3f] md:max-w-xl" />
 
               <div className="flex flex-col gap-2">
+                {/* Text input for post content */}
                 <textarea
                   placeholder="What's new, User?"
-                  className="contentInput flex-grow rounded-xl px-4 py-2 focus:outline-none mb-4 overflow-hidden resize-none w-full h-40"
+                  className="contentInput flex-grow rounded-xl px-4 py-2 focus:outline-none mb-4 overflow-hidden resize-none w-full h-32"
                   style={{ color: "#afaeae" }}
                   value={text}
                   onChange={handleTextChange}
                   required
                 ></textarea>
 
+                {/* Display uploaded image if available */}
                 {imageUrl && (
                   <div className="mt-4 relative">
                     <img
@@ -112,6 +119,7 @@ export default function InputModal() {
                   </div>
                 )}
 
+                {/* Upload button (hidden after upload) */}
                 {showUploadButton && (
                   <UploadButton
                     endpoint="imageUploader"
@@ -119,10 +127,11 @@ export default function InputModal() {
                   />
                 )}
 
+                {/* Submit form */}
                 <form
                   action={async () => {
-                    const id = await getLastID();
-                    await posted(id || 0, text);
+                    const id = await getLastID(); // Fetches the last post ID
+                    await posted(id || 0, text); // Saves the new post
                   }}
                 >
                   <div className="flex justify-center">

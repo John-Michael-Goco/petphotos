@@ -14,20 +14,15 @@ export default function TopNav() {
             <div>Pet Photos</div>
 
             <div className='items-center flex justify-center'>
-            <a className="px-2" href='/'>Home</a> 
-                <a className="px-2" href='/about'>About</a>
-
-                <SignedIn>
-                    <a className="px-2" href='/Posts'>Posts</a>
-                </SignedIn>
-            <div className='px-2 flex justify-center items-center '>
-                <SignedOut>
-                    <SignInButton mode='modal' />
-                </SignedOut>
-                <SignedIn>
-                    <UserButton />
-                </SignedIn>
-            </div>
+                <a className="px-2" href='/'>Home</a>
+                <div className='px-2 flex justify-center items-center '>
+                    <SignedOut>
+                        <SignInButton mode='modal' />
+                    </SignedOut>
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
+                </div>
             </div>
         </nav>
     );

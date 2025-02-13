@@ -21,7 +21,6 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`} suppressHydrationWarning>
         <body className="bg-neutral-700 text-neutral-300">
-
         <TopNav />
           {children}
         </body>

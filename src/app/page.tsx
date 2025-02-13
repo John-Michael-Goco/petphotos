@@ -2,7 +2,6 @@ import "~/styles/globals.css";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 
 // Components
-import TopNav from "./_components/topNav";
 import PostCards from "./_components/postCards";
 import InputModal from "./_components/createPost";
 // Clerk Components
@@ -18,7 +17,6 @@ export default function HomePage() {
           <NextSSRPlugin
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
-          
           <SignedIn>
             <InputModal />
           </SignedIn>
