@@ -11,7 +11,7 @@ export default function TopNav() {
         // Navigation bar container
         <nav className="text-x1 flex items-center justify-between p-3 font-semibold shadow-lg sticky top-0 z-auto h-[7vh] bg-neutral-800 text-neutral-300">
             {/* Left side of the navbar: App name or logo */}
-            <div>Pet Photos</div>
+            <div>PET Photos</div>
 
             <div className='items-center flex justify-center'>
                 <a className="px-2" href='/'>Home</a>
