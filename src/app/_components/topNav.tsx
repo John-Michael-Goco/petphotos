@@ -9,27 +9,20 @@ import {
 export default function TopNav() {
     return (
         // Navigation bar container
-        <nav className="text-x1 flex items-center justify-between p-3 font-semibold shadow-lg sticky top-0 z-auto">
+        <nav className="text-x1 flex items-center justify-between p-3 font-semibold shadow-lg sticky top-0 z-auto h-[7vh] bg-neutral-800 text-neutral-300">
             {/* Left side of the navbar: App name or logo */}
             <div>Pet Photos</div>
 
-            {/* Middle section of the navbar: Navigation links */}
-            <div className="flex items-center justify-between">
-                {/* Home link */}
-                <a className="px-1" href='/'>Home</a>
-
-                {/* Example of a conditional link for signed-in users (currently commented out) */}
-                {/* <SignedIn>
-                    <a className="px-5" href='/'>Posts</a>
-                </SignedIn> */}
-            </div>
-            <div>
-                <SignedOut>
-                    <SignInButton />
-                </SignedOut>
-                <SignedIn>
-                    <UserButton />
-                </SignedIn>
+            <div className='items-center flex justify-center'>
+                <a className="px-2" href='/'>Home</a>
+                <div className='px-2 flex justify-center items-center '>
+                    <SignedOut>
+                        <SignInButton mode='modal' />
+                    </SignedOut>
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
+                </div>
             </div>
         </nav>
     );
